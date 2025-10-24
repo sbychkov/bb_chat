@@ -73,23 +73,34 @@ const handleRoomJoined = async (data: { roomId: string; userId: string }) => {
   try {
     error.value = null;
     
-    // Initialize WebRTC
+    // Initialize WebRTC (don't wait for media yet)
     await initWebRTC(data.userId);
     
-    // Get user media
-    await getUserMedia();
-    
+    // Set as initialized first
     isInitialized.value = true;
+    
+    // Try to get user media (but don't fail if it doesn't work)
+    try {
+      await getUserMedia();
+    } catch (mediaError) {
+      console.warn('Media access failed, continuing without media:', mediaError);
+      // Continue without media - user can enable it later
+    }
     
     // Start WebRTC connections with existing users
     const existingUsers = roomStore.currentRoomUsers;
     for (const user of existingUsers) {
-      await webrtcService.createOffer(user.id);
+      try {
+        await webrtcService.createOffer(user.id);
+      } catch (offerError) {
+        console.warn('Failed to create offer for user:', user.id, offerError);
+      }
     }
     
   } catch (err) {
     error.value = err instanceof Error ? err.message : 'Failed to join room';
     console.error('Error joining room:', err);
+    // Don't disconnect on error, let user try again
   }
 };
 

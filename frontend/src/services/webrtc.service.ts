@@ -27,10 +27,15 @@ export class WebRTCService {
     this.currentUserId = userId;
     this.signalingService.requestWebRTCConfig();
     
-    // Wait for config
-    await new Promise<void>((resolve) => {
+    // Wait for config with timeout
+    await new Promise<void>((resolve, reject) => {
+      const timeout = setTimeout(() => {
+        reject(new Error('WebRTC config timeout'));
+      }, 5000); // 5 second timeout
+      
       const checkConfig = () => {
         if (this.webrtcConfig) {
+          clearTimeout(timeout);
           resolve();
         } else {
           setTimeout(checkConfig, 100);

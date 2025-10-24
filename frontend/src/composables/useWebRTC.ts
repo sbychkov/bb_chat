@@ -21,7 +21,8 @@ export function useWebRTC(signalingService: SignalingService) {
       isInitialized.value = true;
     } catch (err) {
       error.value = err instanceof Error ? err.message : 'WebRTC initialization failed';
-      throw err;
+      console.warn('WebRTC initialization failed:', err);
+      // Don't throw, just log the error and continue
     }
   };
 
