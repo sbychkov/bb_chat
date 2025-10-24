@@ -6,7 +6,7 @@ services:
     expose:
       - "80"
     environment:
-      - VITE_API_URL=http://nginx:80
+      - VITE_API_URL=https://nginx:443
     networks:
       - bb-chat-network
     healthcheck:
@@ -23,7 +23,7 @@ services:
     environment:
       - NODE_ENV=production
       - PORT=3000
-      - CORS_ORIGIN=http://nginx:80
+      - CORS_ORIGIN=https://nginx:443
     networks:
       - bb-chat-network
     healthcheck:
@@ -37,11 +37,14 @@ services:
     build: ./nginx
     ports:
       - "8888:80"
+      - "8443:443"
     depends_on:
       frontend:
         condition: service_healthy
       backend:
         condition: service_healthy
+    volumes:
+      - ./ssl:/etc/nginx/ssl:ro
     networks:
       - bb-chat-network
     healthcheck:
