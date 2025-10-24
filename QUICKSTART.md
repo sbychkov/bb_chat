@@ -20,7 +20,7 @@ This script helps you quickly test the Band of Blades Chat application.
    ```
    All services should show "healthy" status.
 
-3. **Open your browser** to `http://localhost:8888`
+3. **Open your browser** to `https://localhost:8443` (HTTPS) or `http://localhost:8888` (HTTP - redirects to HTTPS)
 
 4. **Test the application**:
    - Enter a room ID (or leave empty for random)

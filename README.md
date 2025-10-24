@@ -26,7 +26,7 @@ A containerized WebRTC video chat application built with Vue 3 frontend and Node
    ```bash
    docker-compose up --build
    ```
-3. Open your browser to `https://localhost:8443` (or `http://localhost:8888` for HTTP redirect)
+3. Open your browser to `https://localhost:8443` (HTTPS) or `http://localhost:8888` (HTTP - redirects to HTTPS)
 
 ## Development
 
@@ -44,27 +44,11 @@ npm install
 npm run dev
 ```
 
-## SSL Configuration
-
-The application supports SSL/TLS encryption using certificate files in the `ssl/` directory:
-
-1. Place your SSL certificate as `ssl/cert.pem`
-2. Place your SSL private key as `ssl/key.pem`
-3. Access the application via `https://localhost:8443`
-
-For development, you can generate self-signed certificates:
-```bash
-mkdir ssl
-openssl genrsa -out ssl/key.pem 2048
-openssl req -new -x509 -key ssl/key.pem -out ssl/cert.pem -days 365 -subj "/C=US/ST=State/L=City/O=Organization/CN=localhost"
-```
-
 ## Production Deployment
 
 1. Update environment variables in `docker-compose.yml` for production
-2. Place production SSL certificates in `ssl/` directory
-3. Run: `docker-compose up -d`
-4. Access via `https://your-server:8443`
+2. Run: `docker-compose up -d`
+3. Access via `https://your-server:8443` (HTTPS) or `http://your-server:8888` (HTTP - redirects to HTTPS)
 
 ## Configuration
 
@@ -75,7 +59,7 @@ openssl req -new -x509 -key ssl/key.pem -out ssl/cert.pem -days 365 -subj "/C=US
 ## Network Requirements
 
 - **Minimum**: 4 CPU cores, 8 GB RAM, 100 Mbps symmetric network
-- **Ports**: 8888 (HTTP redirect), 8443 (HTTPS)
+- **Ports**: 8888 (HTTP - redirects to HTTPS), 8443 (HTTPS)
 - **Firewall**: Allow WebRTC traffic (UDP ports 49152-65535)
 
 ## Troubleshooting
