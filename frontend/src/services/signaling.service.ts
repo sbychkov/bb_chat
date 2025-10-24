@@ -6,7 +6,7 @@ export class SignalingService {
   private apiUrl: string;
 
   constructor() {
-    this.apiUrl = (import.meta as any).env?.VITE_API_URL || 'http://localhost:3000';
+    this.apiUrl = (import.meta as any).env?.VITE_API_URL || window.location.origin;
   }
 
   connect(): Promise<void> {

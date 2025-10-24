@@ -14,12 +14,12 @@ export default defineConfig({
     port: 3000,
     proxy: {
       '/api': {
-        target: 'http://backend:3000',
+        target: 'http://backend:5000',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, '/api')
       },
       '/socket.io': {
-        target: 'http://backend:3000',
+        target: 'http://backend:5000',
         changeOrigin: true,
         ws: true
       }

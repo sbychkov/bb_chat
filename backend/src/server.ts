@@ -41,7 +41,7 @@ io.on('connection', (socket) => {
   roomHandler.handleConnection(socket);
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 
 server.listen(PORT, () => {
   console.log(`🚀 Band of Blades Chat signaling server running on port ${PORT}`);

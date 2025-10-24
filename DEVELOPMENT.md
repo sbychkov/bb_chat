@@ -60,7 +60,7 @@ bb_chat/
    npm install
    npm run dev
    ```
-   Backend runs on `http://localhost:3000`
+   Backend runs on `http://localhost:5000`
 
 2. **Frontend Development**:
    ```bash

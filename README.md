@@ -43,6 +43,7 @@ cd backend
 npm install
 npm run dev
 ```
+Backend runs on `http://localhost:5000`
 
 ## Production Deployment
 
